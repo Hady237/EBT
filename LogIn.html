@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<title> Login Form </title>
@@ -90,25 +90,42 @@
 	</style>
 </head>
 <body>
+<?php
+
+$usernameError = $passwordError = "";
+$username = $password = "";
+
+if($_SERVER["REQUEST_METHOD"] == "GET")
+{
+	if(empty($_GET["username"])){
+	$usernameError = "Username is missing!";
+	} else {
+	$username = $_GET["username"];
+	}
+	if(empty($_GET["password"])){
+	$passwordError = "Password is missing!";
+	} else {
+	$password = $_GET["password"];
+	}
+}
+?>
 <h1 class="title">Tourism</h1>
 <div class="container">
 	<img src="Images/q.png">
-	<form>
+	<form method="get" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
 		<div class="form-input">
 			<input type="text" name="username" placeholder="Enter Username">
+			<span style="color:red"><?php echo $usernameError;?></span>
 		</div>
 		<div class="form-input">
 			<input type="password" name="password" placeholder="Enter Password">
+			<span style="color:red"><?php echo $passwordError;?></span>
 		</div>
-		<input type="submit " name="submit " value="Login" class="btn-login" style="text-align: center;">
+		<input type="submit" name="submit " value="Login" class="btn-login" style="text-align: center;">
 		<br>
 		<a href="@">Forget Password?</a> <br>
 		<a href="@">Sign Up</a>
-
-		
-
 	</form>
-	
 </div>
 <div>
             <span class="reference">

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title> Registration Form </title>
@@ -92,10 +92,53 @@
 	</style>
 </head>
 <body>
+<?php
+
+$usernameError = $passwordError = $dateError = $mobileError = $emailError = $genderError "";
+$username = $password = $day = $month = $year = $mobile = $email = $gender = "";
+
+if($_SERVER["REQUEST_METHOD"] == "GET")
+{
+	if(empty($_GET["username"])){
+	$usernameError = "Username is missing!";
+	} else {
+	$username = $_GET["username"];
+	}
+	if(empty($_GET["password"])){
+	$passwordError = "Password is missing!";
+	} else {
+	$password = $_GET["password"];
+	}
+	if(empty($_GET["day"])||empty($_GET["month"])||empty($_GET["year"]){
+	$dateError = "Date is required!";
+	}
+	else {
+	$day = $_GET["day"];
+	$month = $_GET["month"];
+	$year = $_GET["year"];
+	}
+	if(empty($_GET["mobile"])){
+	$mobileError = "Mobile is missing!";
+	} else {
+	$mobile = $_GET["mobile"];
+	}
+	if(empty($_GET["email"])){
+	$emailError = "Email is missing!";
+	} else {
+	$email = $_GET["email"];
+	}
+	if(empty($_GET["gender"])){
+	$genderError = "Gender is required!";
+	} else {
+	$gender = $_GET["gender"];
+	}
+	
+}
+?>
 <h1 class="title">Tourism</h1>
 <div class="container">
 	<img src="Images/r.png">
-	<form>
+	<form method="get" action="<?php echo $_SERVER["PHP_SELF"];?>"> 
 		<div class="form-input">
 			<input type="text" name="username" placeholder="Enter Username" style=" height: 25px;
 			width: 300px;
@@ -105,11 +148,13 @@
 			padding-left: 10px;
 			border-radius: 4px;
 			">
+			<span style="color:red"><?php echo $usernameError;?></span>
 		</div>
 		<div class="form-input">
 			<input type="password" name="password" placeholder="Enter Password">
+			<span style="color:red"><?php echo $passwordError;?></span>
 		</div>
-		<div class="birthday">
+		<div>
 			<input type="text" name="day" placeholder="Day" style=" height: 25px;
 			width: 70px;
 			font-size: 18px;
@@ -120,8 +165,8 @@
 			float: left;
 			margin-left: 92px; ">
 		</div>
-		<div class="birthday">
-			<input type="text" name="Month" placeholder="Month" style=" height: 25px;
+		<div>
+			<input type="text" name="month" placeholder="Month" style=" height: 25px;
 			width: 70px;
 			font-size: 18px;
 			margin-bottom: 20px;
@@ -131,7 +176,7 @@
 			float: left;
 			margin-left: 32px;">
 		</div>
-		<div class="birthday">
+		<div>
 			<input type="text" name="year" placeholder="Year" style="height: 25px;
 			width: 70px;
 			font-size: 18px;
@@ -141,27 +186,31 @@
 			border-radius: 4px;
 			float: left;
 			margin-left: 32px;">
+			<span style="color:red"><?php echo $dateError;?></span>
 		</div>
-		<div class="birthday">
-			<input type="text" name="mobile number" placeholder="Mobile Number" style="height: 25px;
+		<div>
+			<input type="text" name="mobile" placeholder="Mobile Number" style="height: 25px;
 			width: 300px;
 			font-size: 18px;
 			margin-bottom: 20px;
 			background-color: #fff;
 			padding-left: 10px;
 			border-radius: 4px;">
+			<span style="color:red"><?php echo $mobileError;?></span>
 		</div>
-		<div class="birthday">
-			<input type="text" name="E-mail" placeholder="E-mail address" style="height: 25px;
+		<div>
+			<input type="text" name="email" placeholder="E-mail address" style="height: 25px;
 			width: 300px;
 			font-size: 18px;
 			margin-bottom: 20px;
 			background-color: #fff;
 			padding-left: 10px;
 			border-radius: 4px;">
+			<span style="color:red"><?php echo $emailError;?></span>
 		</div>
-		<input type="radio" name="Gender" value="Male" style="float: left; margin-left: 95px;"><font color="#aaa" style="margin-right: 350px;"> Male</font><br>
-		<input type="radio" name="Gender" value="Male" style="float: left; margin-left: 95px;"><font color="#aaa" style="margin-right: 335px;">Female</font><br> <br>
+		<input type="radio" name="gender" value="Male" style="float: left; margin-left: 95px;"><font color="#aaa" style="margin-right: 350px;"> Male</font><br>
+		<input type="radio" name="gender" value="Male" style="float: left; margin-left: 95px;"><font color="#aaa" style="margin-right: 335px;">Female</font><br> <br>
+		<span style="color:red"><?php echo $genderError;?></span>
 		<input type="submit " name="submit " value="Sign Up" class="btn-login" style="text-align: center;">
 		<br>
 		<a href="@">Forget Password?</a> <br>
